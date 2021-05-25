@@ -7,7 +7,7 @@ class Scene1 extends Phaser.Scene {
     {
       //se PUEDEN cargar los recursos de esta misma escena o de cualquier otra
       
-     
+      this.load.image('final', 'assets/final.jpg');
       this.load.image('sky2', 'assets/sky.jpg');
       this.load.image('ground', 'assets/platform.png');
       this.load.image('star', 'assets/star.png');
@@ -42,7 +42,7 @@ class Scene1 extends Phaser.Scene {
 
       var logo = this.add.image(400, 300, 'logo')
    
-      var startButton = this.add.text(700, 500, 'Jugar', { fontFamily: 'Arial', fontSize: 40, color: 'orange' })
+      var startButton = this.add.text(700, 500, 'Jugar', { fontFamily:"Times New Roman", fontSize: 70, color: 'white' })
         .setInteractive()
         .on('pointerdown', () => this.iniciar() );
         Phaser.Display.Align.In.Center(startButton, this.add.zone(400, 100, 100, 100));

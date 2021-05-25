@@ -17,8 +17,9 @@ class Scene2 extends Phaser.Scene {
 
         //  Now let's create some ledges
         platforms.create(600, 400, 'ground');
-        platforms.create(50, 250, 'ground');
+        platforms.create(100, 300, 'ground');
         platforms.create(750, 220, 'ground');
+        platforms.create(0, 100, 'ground');
 
         // The player and its settings
         player = this.physics.add.sprite(100, 450, 'dude');
@@ -74,7 +75,7 @@ class Scene2 extends Phaser.Scene {
         bombs = this.physics.add.group();
 
         //  The score
-        scoreText = this.add.text(16, 16, 'Puntuacion: 0', { fontSize: '42px',fontFamily:"Times New Roman", fill: 'white' });
+        scoreText = this.add.text(16, -250, 'Puntuacion: 0', { fontSize: '42px',fontFamily:"Times New Roman", fill: 'white' });
 
 
         //  Collide the player and the stars with the platforms
@@ -96,7 +97,7 @@ class Scene2 extends Phaser.Scene {
         initialTime = 30
         //timedEvent = this.time.delayedCall(1000, this.onSecond, [], this, true);
         timedEvent = this.time.addEvent({ delay: 1000, callback: this.onSecond, callbackScope: this, loop: true });
-        timeText = this.add.text(500, 16, '', { fontSize: '42px', fill: 'white', fontFamily:"Times New Roman"});
+        timeText = this.add.text(550,-250, '', { fontSize: '42px', fill: 'white', fontFamily:"Times New Roman"});
 
         this.jumps = 0;
 
@@ -105,6 +106,7 @@ class Scene2 extends Phaser.Scene {
 
     update ()
     {
+
         if (gameOver)
         {       
             return
@@ -113,13 +115,13 @@ class Scene2 extends Phaser.Scene {
         
         if (cursors.left.isDown)
         {
-            player.setVelocityX(-160);
+            player.setVelocityX(-200);
 
             player.anims.play('left', true);
         }
         else if (cursors.right.isDown)
         {
-            player.setVelocityX(160);
+            player.setVelocityX(200);
 
             player.anims.play('right', true);
         }
@@ -131,8 +133,9 @@ class Scene2 extends Phaser.Scene {
         }
 
         if (cursors.up.isDown && player.body.touching.down){
-            player.setVelocityY(-330);
+            player.setVelocityY(-300);
         }
+
     }
 
     collectStar (player, star)
@@ -142,6 +145,7 @@ class Scene2 extends Phaser.Scene {
         //  Add and update the score
         score += star.score //10;
         scoreText.setText('Puntuacion: ' + score);
+
 
 
 
@@ -172,14 +176,13 @@ class Scene2 extends Phaser.Scene {
             initialTime = 30 - level;
         }
     }
-
+    
 
     hitBomb (player, bomb)
     {
         this.gameOver()
     }
-
-
+    
     gameOver() {        
         gameOver = true;
         this.physics.pause();
@@ -199,7 +202,7 @@ class Scene2 extends Phaser.Scene {
         }
 
     }
-
+    
 
 
 }
